@@ -18,38 +18,38 @@ export default function ReviewPage() {
   }, []);
 
   const handleSubmit = async () => {
-    try {
-      console.log("Sending Data:", data);
+  try {
+    console.log("Sending Data:", data);
 
-      const response = await fetch(
-        "http://localhost:5000/api/applications",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      console.log("Response Status:", response.status);
-
-      const result = await response.text();
-      console.log("Response:", result);
-
-      if (response.ok) {
-        alert("Application Submitted Successfully!");
-        localStorage.removeItem("applicationData");
-        router.push("/apply/success");
-      } else {
-        alert("Submission Failed!");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/applications`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       }
-    } catch (error) {
-      console.error("Fetch Error:", error);
-      alert("Server Error!");
-    }
-  };
+    );
 
+    console.log("Response Status:", response.status);
+
+    const result = await response.text();
+    console.log("Response:", result);
+
+    if (response.ok) {
+      alert("Application Submitted Successfully!");
+      localStorage.removeItem("applicationData");
+      router.push("/apply/success");
+    } else {
+      alert("Submission Failed!");
+      console.log(result);
+    }
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    alert("Server Error!");
+  }
+};
   return (
     <main className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
