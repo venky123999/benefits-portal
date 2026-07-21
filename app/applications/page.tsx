@@ -7,7 +7,7 @@ export default function Applications() {
   const [applications, setApplications] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/applications")
+    fetch("`${process.env.NEXT_PUBLIC_API_URL}/api/applications`")
       .then((res) => res.json())
       .then((data) => setApplications(data));
   }, []);

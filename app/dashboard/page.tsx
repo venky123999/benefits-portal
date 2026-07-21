@@ -75,7 +75,7 @@ const currentApplications = filteredApplications.slice(
     return;
   }
 
-fetch("http://localhost:5000/api/applications")
+fetch("`${process.env.NEXT_PUBLIC_API_URL}")
   .then((res) => res.json())
   .then((data) => {
     setApplications(data);
@@ -97,8 +97,7 @@ fetch("http://localhost:5000/api/applications")
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/applications/${id}`,
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/applications/${id}`, 
         {
           method: "DELETE",
         }
@@ -125,7 +124,7 @@ fetch("http://localhost:5000/api/applications")
   ) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/applications/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/applications`,
         {
           method: "PUT",
           headers: {
