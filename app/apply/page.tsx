@@ -46,14 +46,19 @@ export default function ApplyPage() {
 
     if (isValid) {
 
-  localStorage.setItem(
-    "applicationData",
-    JSON.stringify({
-      name,
-      aadhaar,
-      mobile,
-    })
-  );
+  const existingData = JSON.parse(
+  localStorage.getItem("applicationData") || "{}"
+);
+
+localStorage.setItem(
+  "applicationData",
+  JSON.stringify({
+    ...existingData,
+    name,
+    aadhaar,
+    mobile,
+  })
+);
 
   router.push("/apply/address");
 }
