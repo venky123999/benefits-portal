@@ -22,7 +22,7 @@ export default function ReviewPage() {
     console.log("Sending Data:", data);
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/applications`,
+  "/api/applications",
       {
         method: "POST",
         headers: {
